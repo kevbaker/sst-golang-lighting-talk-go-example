@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/kbaker/Code/Analog/ctx/lightning-talks/sst-golang-lighting-talk-go-example'
+make: Leaving directory `/Users/kbaker/Code/Analog/ctx/lightning-talks/sst-golang-lighting-talk-go-example'
+ 
+make: *** No targets.  Stop.
+
