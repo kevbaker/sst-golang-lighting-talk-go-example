@@ -7,7 +7,7 @@ export default class MyStack extends sst.Stack {
     // Create a HTTP API
     const api = new sst.Api(this, "Api", {
       defaultFunctionProps: {
-        srcPath: 'src/mainmodule',
+        srcPath: 'backend/mainmodule',
         environment: {
           HELLO_MESSAGE: "Hello World"
         },
