@@ -11,19 +11,19 @@ help:
 
 
 start: ## start sst
-	npm start --stage local
+	npm run start -- --stage local
 
 build: ## build sst
-	npm run build --stage dev
+	npm run build -- --stage dev
 
 deploy: ## deplooy sst to cloud
-	npm run deploy --stage dev
+	npm run deploy -- --stage dev
 
 remove-local: ## remove sst from cloud
-	npm run remove --stage local
+	npm run remove -- --stage local
 
 remove-dev: ## remove sst from cloud
-	npm run remove --stage dev
+	npm run remove -- --stage dev
 
 remove: ## remove all env from cloud
 	make remove-local;make remove-dev
