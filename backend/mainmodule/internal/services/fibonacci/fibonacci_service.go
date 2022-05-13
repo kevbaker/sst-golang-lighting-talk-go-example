@@ -11,8 +11,7 @@ type FibonacciService struct {
 func (s FibonacciService) GetSequence(count int) FibonacciResponse {
 	fibonacciSequence := s.getSequenceValues(count)
 	response := FibonacciResponse{
-		Name:     "sst-golang-lighting-talk-go-example",
-		Time:     0,
+		Name:     "fibonacci",
 		Error:    "",
 		Max:      fibonacciSequence[len(fibonacciSequence)-1],
 		Sequence: fibonacciSequence}

@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
-	"time"
 
 	"mainmodule/internal/controllers"
 
@@ -13,11 +12,10 @@ import (
 )
 
 func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
-	// Start time
-	start := time.Now()
 
 	// Settings
-	DEFAULT_COUNT := 5
+	const DEFAULT_COUNT int = 5
+	const DEFAULT_SAMPLERATE int = 1000
 
 	// Get param for count
 	count, err := strconv.Atoi(request.PathParameters["count"])
@@ -25,16 +23,18 @@ func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResp
 		count = DEFAULT_COUNT
 	}
 
-	// Get sequence
-	c := controllers.FibonacciController{}
-	fibonacciResponse := c.GetSequence(count)
+	// Get param for samplerate
+	samplerate, err := strconv.Atoi(request.PathParameters["samplerate"])
+	if err != nil {
+		samplerate = DEFAULT_SAMPLERATE
+	}
 
-	// Duration
-	duration := time.Since(start)
-	fibonacciResponse.Time = float64(duration.Seconds())
+	// Get sequence
+	c := controllers.DataController{}
+	dataResponse := c.GetData(count, samplerate)
 
 	// Format results and return as API Gateway Response
-	responseJSON, _ := json.Marshal(fibonacciResponse)
+	responseJSON, _ := json.Marshal(dataResponse)
 
 	// Build Response
 	response := events.APIGatewayProxyResponse{

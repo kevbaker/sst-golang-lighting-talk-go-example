@@ -14,7 +14,7 @@ export default class MyStack extends sst.Stack {
       },
       routes: {
         "GET /": "cmd/handlers/fibonacci/main.go",          // use path relative to application root
-        "GET /{count}": "cmd/handlers/fibonacci/main.go",   // use path relative to application root
+        "GET /{count}/{samplerate}": "cmd/handlers/fibonacci/main.go",   // use path relative to application root
       }
     });
 
