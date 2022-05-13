@@ -7,14 +7,14 @@ export default class MyStack extends sst.Stack {
     // Create a HTTP API
     const api = new sst.Api(this, "Api", {
       defaultFunctionProps: {
-        srcPath: 'backend/mainmodule',
+        srcPath: 'backend/mainmodule',  // use path to application root
         environment: {
           HELLO_MESSAGE: "Hello World"
         },
       },
       routes: {
-        "GET /": "cmd/handlers/fibonacci/main.go",
-        "GET /{count}": "cmd/handlers/fibonacci/main.go",
+        "GET /": "cmd/handlers/fibonacci/main.go",          // use path relative to application root
+        "GET /{count}": "cmd/handlers/fibonacci/main.go",   // use path relative to application root
       }
     });
 

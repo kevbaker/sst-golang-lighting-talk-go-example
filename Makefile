@@ -1,3 +1,5 @@
+# Makefile
+# This file is used to be more language agnostic for build/automated task commands
 
 # HELP
 .DEFAULT_GOAL := help
