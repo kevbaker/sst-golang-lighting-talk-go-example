@@ -13,7 +13,6 @@ func (s FibonacciService) GetSequence(count int) FibonacciResponse {
 	response := FibonacciResponse{
 		Name:     "fibonacci",
 		Error:    "",
-		Max:      fibonacciSequence[len(fibonacciSequence)-1],
 		Sequence: fibonacciSequence}
 
 	return response
@@ -21,8 +20,8 @@ func (s FibonacciService) GetSequence(count int) FibonacciResponse {
 
 // getSequenceValues of fibonacci numbers
 // return a int array
-func (s FibonacciService) getSequenceValues(count int) []int {
-	fibonacci := []int{0, 1}
+func (s FibonacciService) getSequenceValues(count int) []float64 {
+	fibonacci := []float64{0, 1}
 	for i := 1; i < count; i++ {
 		next := (fibonacci[i] + fibonacci[i-1])
 		fibonacci = append(fibonacci, next)

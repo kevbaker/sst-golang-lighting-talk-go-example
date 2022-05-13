@@ -1,42 +1,26 @@
 package main
 
+// gnuplot cli application
+// This is a simple app to demonstrate usign the same controller code
+// from the AWS Lambda function in a CLI
+
 import (
 	"fmt"
-	"math"
+
+	"mainmodule/internal/controllers"
 
 	"github.com/sbinet/go-gnuplot"
 )
 
 // REF: https://github.com/sbinet/go-gnuplot
 
-const (
-	pDuration           = 5
-	pSampleRate         = 44000
-	pFrequency  float64 = 100
-)
-
-func generate(Duration int, SampleRate int, Frequency float64) []float64 {
-	var (
-		start float64 = 1.0
-		end   float64 = 1.0e-4
-		out   []float64
-	)
-	nsamps := Duration * SampleRate
-	tau := math.Pi * 2
-	var angle float64 = tau / float64(nsamps)
-	decayfac := math.Pow(end/start, 1.0/float64(nsamps))
-	for i := 0; i < nsamps; i++ {
-		sample := math.Sin(angle * Frequency * float64(i))
-		sample *= start
-		start *= decayfac
-		fmt.Printf("%.8f\n", sample)
-		out = append(out, sample)
-	}
-
-	return out
-}
-
 func main() {
+
+	c := controllers.DataController{}
+	dataResponse := c.GetData(100, 1000)
+	values := dataResponse.Plotdata.Data
+	// values := dataResponse.Fibonacci.Sequence
+
 	fname := ""
 	persist := false
 	debug := true
@@ -48,12 +32,10 @@ func main() {
 	}
 	defer p.Close()
 
-	values := generate(pDuration, pSampleRate, pFrequency)
 	p.PlotX(values, "amazing data")
 	p.CheckedCmd("set terminal png")
 	p.CheckedCmd("set output 'plot.png'")
 	p.CheckedCmd("replot")
-
 	p.CheckedCmd("q")
 
 }
