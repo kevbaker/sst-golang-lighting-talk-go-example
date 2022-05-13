@@ -1,8 +1,12 @@
 # SST Golang Lighting Talk Go Example
 
+![Speedy Services with Golang and SST](/extra/gopher_sst_aws_speedy.png)
+
 ## Overview
 
 A simple Go example SST project for the SST Golang Lighting Talk
+
+
 
 ## Getting Started
 
