@@ -8,12 +8,28 @@ type FibonacciService struct {
 	Name string
 }
 
-func (s FibonacciService) DoTest() []string {
-	list := []string{"hello", "fibonacci"}
-	return list
+// GetSequence of fibonacci numbers in a struct
+// return a FibonacciResponse
+func (s FibonacciService) GetSequence(count int) FibonacciResponse {
+	fibonacciSequence := s.getSequenceValues(count)
+	response := FibonacciResponse{
+		Name:     "sst-golang-lighting-talk-go-example",
+		Time:     time.Now().String(),
+		Error:    "",
+		Max:      fibonacciSequence[len(fibonacciSequence)-1],
+		Sequence: fibonacciSequence}
+
+	return response
 }
 
-func (s FibonacciService) GetSequence() FibonacciResponse {
-	response := FibonacciResponse{Time: time.Now().String(), Error: "NOPE", Max: 12, Sequence: []int{2, 3, 5, 7, 11, 13}}
-	return response
+// getSequenceValues of fibonacci numbers
+// return a int array
+func (s FibonacciService) getSequenceValues(count int) []int {
+	fibonacci := []int{0, 1}
+	for i := 1; i < count; i++ {
+		next := (fibonacci[i] + fibonacci[i-1])
+		fibonacci = append(fibonacci, next)
+	}
+
+	return fibonacci
 }

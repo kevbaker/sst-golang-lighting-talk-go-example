@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"mainmodule/internal/services/fibonacci"
 
@@ -12,8 +13,18 @@ import (
 
 func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
 
+	// Settings
+	DEFAULT_COUNT := 5
+
+	// Get param for count
+	count, err := strconv.Atoi(request.PathParameters["count"])
+	if err != nil {
+		count = DEFAULT_COUNT
+	}
+
+	// Get sequence
 	s := fibonacci.FibonacciService{}
-	fibonacciResponse := s.GetSequence()
+	fibonacciResponse := s.GetSequence(count)
 
 	// Format results and return as API Gateway Response
 	responseJSON, _ := json.Marshal(fibonacciResponse)
