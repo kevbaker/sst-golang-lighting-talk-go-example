@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"time"
 
 	"mainmodule/internal/services/fibonacci"
 
@@ -12,6 +13,8 @@ import (
 )
 
 func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse, error) {
+	// Start time
+	start := time.Now()
 
 	// Settings
 	DEFAULT_COUNT := 5
@@ -25,6 +28,10 @@ func Handler(request events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResp
 	// Get sequence
 	s := fibonacci.FibonacciService{}
 	fibonacciResponse := s.GetSequence(count)
+
+	// Duration
+	duration := time.Since(start)
+	fibonacciResponse.Time = duration.Microseconds()
 
 	// Format results and return as API Gateway Response
 	responseJSON, _ := json.Marshal(fibonacciResponse)

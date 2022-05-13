@@ -1,7 +1,5 @@
 package fibonacci
 
-import "time"
-
 // FibonacciService struct to contains features
 // related to FibonacciService data
 type FibonacciService struct {
@@ -14,7 +12,7 @@ func (s FibonacciService) GetSequence(count int) FibonacciResponse {
 	fibonacciSequence := s.getSequenceValues(count)
 	response := FibonacciResponse{
 		Name:     "sst-golang-lighting-talk-go-example",
-		Time:     time.Now().String(),
+		Time:     0,
 		Error:    "",
 		Max:      fibonacciSequence[len(fibonacciSequence)-1],
 		Sequence: fibonacciSequence}
