@@ -19,8 +19,13 @@ type PlotdataService struct {
 // return a PlotdataResponse
 func (s PlotdataService) GetData(samplerate int) PlotdataResponse {
 
+	// static settings
+	duration := 5
+	frequency := 100.0
+
+	// generate plot data
 	response := PlotdataResponse{Name: "plotdata"}
-	response.Data = s.generate(5, samplerate, 100)
+	response.Data = s.generate(duration, samplerate, frequency)
 
 	return response
 }

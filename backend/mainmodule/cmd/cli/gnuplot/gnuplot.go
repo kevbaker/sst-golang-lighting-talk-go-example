@@ -16,14 +16,15 @@ import (
 
 func main() {
 
+	// Call controller for data
 	c := controllers.DataController{}
 	dataResponse := c.GetData(100, 1000)
 	values := dataResponse.Plotdata.Data
 
+	// Initialize Plotter
 	fname := ""
 	persist := false
 	debug := true
-
 	p, err := gnuplot.NewPlotter(fname, persist, debug)
 	if err != nil {
 		err_string := fmt.Sprintf("** err: %v\n", err)
@@ -31,7 +32,10 @@ func main() {
 	}
 	defer p.Close()
 
+	// Send Values to Plot
 	p.PlotX(values, "amazing data")
+
+	// Define format and run plot
 	p.CheckedCmd("set terminal png")
 	p.CheckedCmd("set output 'plot.png'")
 	p.CheckedCmd("replot")
