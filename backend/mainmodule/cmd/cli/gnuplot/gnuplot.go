@@ -19,7 +19,6 @@ func main() {
 	c := controllers.DataController{}
 	dataResponse := c.GetData(100, 1000)
 	values := dataResponse.Plotdata.Data
-	// values := dataResponse.Fibonacci.Sequence
 
 	fname := ""
 	persist := false
